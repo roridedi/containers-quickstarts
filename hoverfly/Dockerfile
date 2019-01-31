@@ -6,7 +6,7 @@ ENV HOVERFLY_DOWNLOAD_URI https://github.com/SpectoLabs/hoverfly/releases/downlo
 ENV HOME /home/hoverfly
 
 RUN PACKAGE_LIST="less unzip" && \
-    yum install -y --disablerepo=* --enablerepo=rhel-7-server-rpms $PACKAGE_LIST && \
+    yum install -y $PACKAGE_LIST && \
     rpm -V $PACKAGE_LIST && \
     yum clean all -y && \
     curl -o /tmp/hoverfly.zip -L $HOVERFLY_DOWNLOAD_URI && \
