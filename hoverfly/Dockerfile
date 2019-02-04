@@ -1,12 +1,10 @@
-FROM centos:latest
-
-MAINTAINER orisdev@gmail.com
+FROM registry.access.redhat.com/rhel7/rhel
 
 ENV HOVERFLY_DOWNLOAD_URI https://github.com/SpectoLabs/hoverfly/releases/download/v0.17.7/hoverfly_bundle_linux_amd64.zip 
 ENV HOME /home/hoverfly
 
 RUN PACKAGE_LIST="less unzip" && \
-    yum install -y $PACKAGE_LIST && \
+    yum install -y --disablerepo=* --enablerepo=rhel-7-server-rpms $PACKAGE_LIST && \
     rpm -V $PACKAGE_LIST && \
     yum clean all -y && \
     curl -o /tmp/hoverfly.zip -L $HOVERFLY_DOWNLOAD_URI && \
